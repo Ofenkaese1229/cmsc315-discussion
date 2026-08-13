@@ -33,3 +33,24 @@ Your reflection should be approximately 150–200 words and address the followin
 2. What challenges did you encounter, and how did you overcome them?
 3. Compare OOP to procedural programming.
 4. Discuss the benefits of maintainability and reusability and apply this managing overhead, practical application development, and future use.
+
+This assignment strengthened my understanding of core OOP concepts in Python, 
+particularly inheritance, class versus instance namespaces, and the distinction between 
+shallow and deep copying. Building a parent and child class showed me how super() lets 
+a subclass extend rather than fully replace inherited behavior, while the namespace demo 
+clarified how instance attributes stay isolated even when a class variable is shared across objects.
+
+The most challenging part was correctly demonstrating shallow versus deep copy. 
+My first attempt didn't clearly show the difference because I mutated an immutable attribute 
+(a string) instead of the nested mutable list. Once I mutated the enrolled_classes list 
+after copying, the shallow copy correctly reflected the change while the deep copy stayed 
+independent, which made the concept concrete rather than theoretical.
+Compared to procedural programming, where logic and data are separate and code runs top-down 
+through functions, OOP bundles data and behavior together into objects, 
+making relationships between entities more explicit.
+
+This structure directly supports maintainability and reusability: 
+changes to shared logic happen in one place (the parent class), new features extend existing code
+rather than duplicating it, and future development can build on existing classes with far less 
+overhead than rewriting procedural functions from scratch.
+

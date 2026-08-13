@@ -9,9 +9,7 @@ You are provided with starter code containing TODO sections. Your task is to com
 analyze the code to demonstrate understanding of inheritance, namespaces, and object copying.
 """
 
-
 from copy import copy, deepcopy
-
 
 # TODO 1:
 # Create a parent class.
@@ -24,6 +22,7 @@ from copy import copy, deepcopy
 #
 # Replace the pass statement with your implementation.
 
+# Parent class
 class ParentClass:
     # Class variable
     institute = "University of Maryland"
@@ -51,12 +50,17 @@ class ParentClass:
 #
 # Replace the pass statement with your implementation.
 
+# Child class (inherits from ParentClass)
 class ChildClass(ParentClass):
     # New class variable
     grade_level = "Senior"
 
-    def __init__(self, name, age, studentID):
+    # Student-created extension:
+    # Class variable shared by ALL ChildClass instances that tracks
+    # how many total enrollments have happened across every student.
+    total_enrollments = 0
 
+    def __init__(self, name, age, studentID):
         # Inheritance
         super().__init__(name, age)
 
@@ -67,11 +71,22 @@ class ChildClass(ParentClass):
     # New method
     def enroll(self, class_name):
         self.enrolled_classes.append(class_name)
+        ChildClass.total_enrollments += 1
         return f"\t{self.name} enrolled in {class_name}."
 
     # Override parent method
     def display_info(self):
-        return f"\t{super().display_info()}, ID: {self.studentID}, Classes: {self.enrolled_classes}"
+        return (f"\t{super().display_info()}, ID: {self.studentID}, "
+                f"Classes: {self.enrolled_classes}")
+
+    # Student-created extension:
+    # Removes a class from the student's enrolled list, demonstrating
+    # another method that mutates instance-level nested data.
+    def graduate(self, class_name):
+        if class_name in self.enrolled_classes:
+            self.enrolled_classes.remove(class_name)
+            return f"\t{self.name} completed and dropped {class_name}."
+        return f"\t{self.name} was not enrolled in {class_name}."
 
 # TODO 3:
 # Create a function that demonstrates class namespaces and instance namespaces.
@@ -86,19 +101,14 @@ class ChildClass(ParentClass):
 
 def demonstrate_namespaces():
     print("\n=== Namespace Demonstration ===")
-    print("TODO: Implement namespace demonstration")
 
-    # Objects
     s1 = ChildClass("James Watson", 26, "UMGC1234")
     s2 = ChildClass("Angie Taylor", 22, "UMGC5678")
 
-    # Access via class
     print(f"\n\tClass variable accessed through class: {ChildClass.grade_level}")
 
-    # Access via object
     print(f"\tClass variable accessed through object: {s1.grade_level}")
 
-    # New attribute for one object
     s1.GPA = 3.2
 
     print(f"\n\ts1.__dict__ = {s1.__dict__}")
@@ -122,7 +132,6 @@ def demonstrate_namespaces():
 
 def demonstrate_copying():
     print("\n=== Copy Demonstration ===")
-    print("TODO: Implement shallow copy and deep copy demonstration")
 
     original = ChildClass("Bob Smith", 29, "UMGC2468")
     original.enroll("MATH 150")
@@ -142,7 +151,9 @@ def demonstrate_copying():
     original.name = "Bob Smith (Updated)"
 
     print(f"\n\tOriginal: {original.name}, {original.enrolled_classes}")
+    # Shallow copy shares the list, so it sees "ART 115" too
     print(f"\tShallow: {shallow_copy.name}, {shallow_copy.enrolled_classes}")
+    # Deep copy has its own list, so it's unaffected
     print(f"\tDeep: {deep_copy.name}, {deep_copy.enrolled_classes}")
 
 # TODO 5:
@@ -156,21 +167,25 @@ def demonstrate_copying():
 # - Call your copy demonstration function.
 
 def main():
-    print("=== Unit 1 OOP Assignment ===")
-
-    print("\nTODO: Create and test your parent object")
+    print("\n=== Unit 1 OOP Assignment ===")
 
     person = ParentClass("Lea Port", 32)
-    print(f"\t{person.display_info()}")
-
-    print("\nTODO: Create and test your child object")
+    print(f"\n\t{person.display_info()}")
 
     student = ChildClass("Lucia Mendez", 19, "UMGC1357")
+
     print(student.display_info())
+
     print(student.enroll("CMSC 315"))
 
     demonstrate_namespaces()
     demonstrate_copying()
+
+    # Student-created extension demonstration
+    print("\n=== Student Extension: Enrollment Tracking & Graduation ===")
+    print(f"\n\tTotal enrollments across all students so far: {ChildClass.total_enrollments}")
+    print(student.graduate("CMSC 315"))
+    print(f"\t{student.name}'s classes after graduating: {student.enrolled_classes}")
 
 if __name__ == "__main__":
     main()
