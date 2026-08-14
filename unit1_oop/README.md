@@ -34,23 +34,28 @@ Your reflection should be approximately 150–200 words and address the followin
 3. Compare OOP to procedural programming.
 4. Discuss the benefits of maintainability and reusability and apply this managing overhead, practical application development, and future use.
 
-This assignment strengthened my understanding of core OOP concepts in Python, 
-particularly inheritance, class versus instance namespaces, and the distinction between 
-shallow and deep copying. Building a parent and child class showed me how super() lets 
-a subclass extend rather than fully replace inherited behavior, while the namespace demo 
-clarified how instance attributes stay isolated even when a class variable is shared across objects.
+Working through this assignment really solidified my understanding of core OOP concepts in Python,
+especially inheritance, the difference between class and instance namespaces, and shallow versus 
+deep copying. Building out a parent and child class made it click for me how super() lets a subclass
+build on top of inherited behavior instead of just overwriting it entirely. 
 
-The most challenging part was correctly demonstrating shallow versus deep copy. 
-My first attempt didn't clearly show the difference because I mutated an immutable attribute 
-(a string) instead of the nested mutable list. Once I mutated the enrolled_classes list 
-after copying, the shallow copy correctly reflected the change while the deep copy stayed 
-independent, which made the concept concrete rather than theoretical.
-Compared to procedural programming, where logic and data are separate and code runs top-down 
-through functions, OOP bundles data and behavior together into objects, 
-making relationships between entities more explicit.
+The namespace exercise was also useful for seeing how instance attributes stay separate for each 
+object, even when a class variable is being shared across all of them.
 
-This structure directly supports maintainability and reusability: 
-changes to shared logic happen in one place (the parent class), new features extend existing code
-rather than duplicating it, and future development can build on existing classes with far less 
-overhead than rewriting procedural functions from scratch.
+The part that gave me the most trouble was actually demonstrating shallow versus deep copy 
+in a way that showed a real difference. My first attempt fell flat because I was mutating an 
+immutable attribute, a string, instead of the nested list. Once I switched to mutating 
+enrolled_classes after copying, everything made sense: the shallow copy picked up the change, 
+since it was still pointing to the same list, while the deep copy stayed completely independent. 
+
+Thinking about this compared to procedural programming, where data and logic live separately and 
+everything runs top-down through functions, OOP feels like a different way of organizing a 
+problem entirely. Bundling data and behavior together into objects makes the relationships between
+different parts of the program much more explicit and easier to reason about.
+
+That structure ends up paying off in terms of maintainability and reusability, too. Since shared 
+logic lives in the parent class, updates only need to happen once, and new functionality can 
+extend what's already there instead of duplicating it. That means future development builds on 
+existing classes rather than requiring a rewrite from scratch, which is a huge time saver 
+compared to procedural code.
 
