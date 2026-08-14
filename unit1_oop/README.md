@@ -37,10 +37,9 @@ Your reflection should be approximately 150–200 words and address the followin
 Working through this assignment really solidified my understanding of core OOP concepts in Python,
 especially inheritance, the difference between class and instance namespaces, and shallow versus 
 deep copying. Building out a parent and child class made it click for me how super() lets a subclass
-build on top of inherited behavior instead of just overwriting it entirely. 
-
-The namespace exercise was also useful for seeing how instance attributes stay separate for each 
-object, even when a class variable is being shared across all of them.
+build on top of inherited behavior instead of just overwriting it entirely. The namespace
+exercise was also useful for seeing how instance attributes stay separate for each object,
+even when a class variable is being shared across all of them.
 
 The part that gave me the most trouble was actually demonstrating shallow versus deep copy 
 in a way that showed a real difference. My first attempt fell flat because I was mutating an 
