@@ -34,3 +34,23 @@ Your reflection should be approximately 150–200 words and address the followin
 1. What concepts or skills did you learn while completing this assignment?
 2. What challenges did you encounter, and how did you overcome them?
 3. Explain the differences between stacks and queues as this relates to real-world applications.
+
+This assignment reinforced my understanding of two fundamental data structures: the Stack (LIFO) 
+and the Queue (FIFO). I learned how a Python list naturally supports stack behavior, 
+since append() and pop() both operate on the same end, giving LIFO order without extra effort. 
+For the queue, I used collections.deque instead of a list, which taught me why popleft() is more 
+efficient than removing from the front of a list, an important distinction I hadn't previously 
+considered.
+
+The main challenge was handling edge cases correctly, like popping from an empty stack or 
+dequeuing from an empty queue. My first instinct was to let these raise unhandled exceptions, 
+but I realized returning a clear message instead is far more predictable and mirrors how real 
+systems handle failure gracefully rather than crashing.
+
+Stacks and queues serve very different purposes in real-world systems despite both managing 
+ordered data. Stacks fit situations where the most recent action matters most, like undo 
+functionality in a text editor or the call stack that tracks function execution. Queues fit 
+situations where fairness and order of arrival matter, like a print job queue or a customer 
+support ticket system, where the first request in should be the first one handled. 
+Recognizing which structure actually matches a problem's requirements, rather than defaulting 
+to whichever is more familiar, is the real skill this assignment reinforced.
