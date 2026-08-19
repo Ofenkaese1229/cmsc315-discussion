@@ -22,26 +22,30 @@ class Stack:
 
     def push(self, value):
         # TODO (Student): Add value to the stack.
-        # Add a short comment explaining why this operation supports LIFO behavior.
+        # Adds the value to the top of the stack. Since removals also
+        # happen from the top, the most recent push is always removed first (LIFO).
         self.items.append(value)
 
     def pop(self):
         # TODO (Student): Remove and return the most recently added value.
-        # Improve or explain empty-stack handling.
-        # What should happen if the stack is empty?
+        # Removes and returns the top value of the stack. If the stack
+        # is empty, returns a message instead of raising an error.
         if self.is_empty():
             return "Cannot pop from an empty stack."
         return self.items.pop()
 
     def peek(self):
         # TODO (Student): Return the top value without removing it.
-        # Add a comment explaining what peek does.
+        # Returns the top value without removing it, leaving the stack
+        # unchanged. Useful for checking what's next without altering state.
         if self.is_empty():
             return "Cannot peek from an empty stack."
         return self.items[-1]
 
     def is_empty(self):
         # TODO (Student): Return True if the stack has no values.
+        # Checks whether the stack has any values. Returns True if it's
+        # empty, which helps other methods avoid invalid operations.
         return len(self.items) == 0
 
 
@@ -53,25 +57,30 @@ class Queue:
 
     def enqueue(self, value):
         # TODO (Student): Add value to the back of the queue.
-        # Add a short comment explaining why this operation supports FIFO behavior.
+        # Adds the value to the back of the queue. Since removals happen
+        # from the front, the first value added is always removed first (FIFO).
         self.items.append(value)
 
     def dequeue(self):
         # TODO (Student): Remove and return the value from the front of the queue.
-        # Explain or improve empty-queue handling.
+        # Removes and returns the front value of the queue. If the queue
+        # is empty, returns a message instead of raising an error.
         if self.is_empty():
             return "Cannot dequeue from an empty queue."
         return self.items.popleft()
 
     def front(self):
         # TODO (Student): Return the front value without removing it.
-        # Add a comment explaining what front returns.
+        # Returns the front value without removing it, leaving the queue
+        # unchanged. Useful for checking what's next without altering state.
         if self.is_empty():
             return "Cannot check front when queue is empty."
         return self.items[0]
 
     def is_empty(self):
         # TODO (Student): Return True if the queue has no values.
+        # Checks whether the queue has any values. Returns True if it's
+        # empty, which helps other methods avoid invalid operations.
         if len(self.items) == 0:
             return True
         return False
