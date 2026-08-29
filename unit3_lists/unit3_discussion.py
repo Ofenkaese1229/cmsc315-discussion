@@ -22,7 +22,11 @@ def insert_at(lst, index, value):
     - Use comments to explain how insertion performance may vary depending on
       where the insertion occurs.
     """
-    pass
+
+    # Insert the new value at the specified position.
+    # Existing elements at that index and after shift to the right.
+    # Inserting near the beginning requires more shifting than at the end
+    lst.insert(index, value)
 
 
 def delete_at(lst, index):
@@ -36,7 +40,13 @@ def delete_at(lst, index):
     - Return None if the index is invalid.
     - Add comments explaining why index validation and safe deletion are important.
     """
-    pass
+
+    # Verify that the index refers to an existing item
+    if 0 <= index < len(lst):
+        # Later elements shift left after the item is removed.
+        return lst.pop(index)
+    # Return None instead of causing an error
+    return None
 
 
 def search_value(lst, value):
@@ -49,11 +59,18 @@ def search_value(lst, value):
     - Return -1 if the value is not found.
     - Add comments explaining why this is a linear search and why it scans sequentially.
     """
-    pass
+    # Linear search checks each item in order.
+    for index in range(len(lst)):
+        # Return the index when a match is found
+        if lst[index] == value:
+            return index
+    return -1
 
 
 def main():
     print("=== UNIT 3: LIST OPERATIONS ===")
+    print("\n=== INSERTION TESTS ===")
+    print("TODO: Create a list and demonstrate insertions.")
 
     # ===============================
     # TODO (Student): INSERTION TESTS
@@ -61,45 +78,74 @@ def main():
     #
     # Requirements:
     # 1. Create a list containing several values.
-    # 2. Display the original list.
-    # 3. Test insertion at:
-    #    - the beginning
-    #    - the middle
-    #    - the end
-    # 4. Display the list after each insertion.
-    # 5. Use comments to explain each step in the implementation.
+    numbers = [10, 20, 30, 40]
 
-    print("\n=== INSERTION TESTS ===")
-    print("TODO: Create a list and demonstrate insertions.")
+    # 2. Display the original list.
+    print("\nOriginal list: ", numbers)
+
+    # 3. Test insertion at:
+
+    #    - the beginning
+    insert_at(numbers, 0, 5)
+    print("After inserting 5 at the beginning:", numbers)
+
+    #    - the middle
+    insert_at(numbers, 3, 15)
+    print("After inserting 15 in the middle:", numbers)
+
+    #    - the end
+    insert_at(numbers, len(numbers), 25)
+    print("After inserting 25 at the end:", numbers)
 
     # ===============================
     # TODO (Student): DELETION TESTS
     # ===============================
-    #
-    # Requirements:
-    # 1. Delete an item from:
-    #    - the beginning
-    #    - the middle
-    #    - the end
-    # 2. Display the removed value.
-    # 3. Display the updated list after each deletion.
-    # 4. Use comments to clearly explain what is happening in the output.
-
     print("\n=== DELETION TESTS ===")
     print("TODO: Demonstrate deletions from multiple positions.")
+    # Requirements:
+    # 1. Delete an item from:
+
+    #    - the beginning
+    removed = delete_at(numbers, 0)
+    print("\nRemoved from beginning: ", removed)
+    print("Updated list: ", numbers)
+
+    #    - the middle
+    middle_index = len(numbers) // 2
+    removed = delete_at(numbers, middle_index)
+    print("\nRemoved from middle: ", removed)
+    print("Updated list: ", numbers)
+
+    #    - the end
+    removed = delete_at(numbers, len(numbers)-1)
+    print("\nRemoved from end: ", removed)
+    print("Updated list: ", numbers)
 
     # ===============================
     # TODO (Student): SEARCH TESTS
     # ===============================
     #
-    # Requirements:
-    # 1. Search for a value that exists.
-    # 2. Search for a value that does not exist.
-    # 3. Display the search results with clear explanations.
-    # 4. Use comments to explain each step.
-
     print("\n=== SEARCH TESTS ===")
     print("TODO: Demonstrate searching for values.")
+    # Requirements:
+    # 1. Search for a value that exists.
+    value = 20
+    result = search_value(numbers, value)
+
+    if result != -1:
+        print(f"\nSearch for {value}: found at index {result}")
+    else:
+        print(f"\nSearch for {value}: not found")
+
+    # 2. Search for a value that does not exist.
+    value = 99
+    result = search_value(numbers, value)
+
+    if result != -1:
+        print(f"Search for {value}: found at index {result}")
+    else:
+        print(f"Search for {value}: not found")
+
 
     # ===============================
     # TODO (Student): EDGE CASES
@@ -107,15 +153,27 @@ def main():
     #
     # Demonstrate at least two edge cases.
     #
-    # Example ideas:
-    # - Delete using an invalid index
-    # - Search for a missing value
-    # - Insert into an empty list
-    # - Delete from an empty list
-    # - Use comments to explain each edge case.
-
     print("\n=== EDGE CASES ===")
     print("TODO: Demonstrate at least two edge cases.")
+    # Example ideas:
+    # - Delete using an invalid index
+    removed = delete_at(numbers, 100)
+    print("\nDelete using invalid index 100: ", removed)
+    # - Search for a missing value
+    result = search_value(numbers, 100)
+    print("Search for missing value 100: ", result)
+
+    # - Insert into an empty list
+    empty_list = []
+    insert_at(empty_list, 0, "First Item")
+    print("Insert into empty list:", empty_list)
+
+    # - Delete from an empty list
+    another_empty_list = []
+    removed = delete_at(another_empty_list, 0)
+    print("Delete from empty list:", removed )
+    # - Use comments to explain each edge case.
+
 
 
 
