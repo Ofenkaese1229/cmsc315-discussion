@@ -172,7 +172,7 @@ def main():
     another_empty_list = []
     removed = delete_at(another_empty_list, 0)
     print("Delete from empty list:", removed )
-    # - Use comments to explain each edge case.
+
 
 
 
