@@ -75,25 +75,26 @@ def main():
     # ===============================
     # TODO (Student): INSERTION TESTS
     # ===============================
-    #
-    # Requirements:
+
     # 1. Create a list containing several values.
     numbers = [10, 20, 30, 40]
 
     # 2. Display the original list.
     print("\nOriginal list: ", numbers)
 
-    # 3. Test insertion at:
 
-    #    - the beginning
+    # Insert a value at the beginning of the list.
+    # All existing elements shift one position to the right.
     insert_at(numbers, 0, 5)
     print("After inserting 5 at the beginning:", numbers)
 
-    #    - the middle
+    # Insert a value in the middle of the list.
+    # Elements after the insertion point shift to the right.
     insert_at(numbers, 3, 15)
     print("After inserting 15 in the middle:", numbers)
 
-    #    - the end
+    # Insert a value at the end of the list.
+    # No existing elements need to be shifted beyond the end position.
     insert_at(numbers, len(numbers), 25)
     print("After inserting 25 at the end:", numbers)
 
@@ -102,21 +103,19 @@ def main():
     # ===============================
     print("\n=== DELETION TESTS ===")
     print("TODO: Demonstrate deletions from multiple positions.")
-    # Requirements:
-    # 1. Delete an item from:
 
-    #    - the beginning
+    # Remove the first item in the list.
     removed = delete_at(numbers, 0)
     print("\nRemoved from beginning: ", removed)
     print("Updated list: ", numbers)
 
-    #    - the middle
+    # Calculate the middle index and remove the item at that position.
     middle_index = len(numbers) // 2
     removed = delete_at(numbers, middle_index)
     print("\nRemoved from middle: ", removed)
     print("Updated list: ", numbers)
 
-    #    - the end
+    # Remove the last item in the list.
     removed = delete_at(numbers, len(numbers)-1)
     print("\nRemoved from end: ", removed)
     print("Updated list: ", numbers)
@@ -124,11 +123,11 @@ def main():
     # ===============================
     # TODO (Student): SEARCH TESTS
     # ===============================
-    #
+
     print("\n=== SEARCH TESTS ===")
     print("TODO: Demonstrate searching for values.")
-    # Requirements:
-    # 1. Search for a value that exists.
+
+    # Search for a value that is currently in the list.
     value = 20
     result = search_value(numbers, value)
 
@@ -137,7 +136,7 @@ def main():
     else:
         print(f"\nSearch for {value}: not found")
 
-    # 2. Search for a value that does not exist.
+    # Search for a value that does not exist in the list.
     value = 99
     result = search_value(numbers, value)
 
@@ -150,30 +149,31 @@ def main():
     # ===============================
     # TODO (Student): EDGE CASES
     # ===============================
-    #
-    # Demonstrate at least two edge cases.
-    #
+
     print("\n=== EDGE CASES ===")
     print("TODO: Demonstrate at least two edge cases.")
-    # Example ideas:
-    # - Delete using an invalid index
+
+    # Attempt to delete an item using an index outside the list.
+    # The function safely returns None instead of causing an error.
     removed = delete_at(numbers, 100)
     print("\nDelete using invalid index 100: ", removed)
-    # - Search for a missing value
+
+    # Search for a value that is not present in the list.
+    # The function returns -1 when no match is found.
     result = search_value(numbers, 100)
     print("Search for missing value 100: ", result)
 
-    # - Insert into an empty list
+    # Insert a value into an empty list.
+    # This demonstrates that insertion works even when the list has no items.
     empty_list = []
     insert_at(empty_list, 0, "First Item")
     print("Insert into empty list:", empty_list)
 
-    # - Delete from an empty list
+    # Attempt to delete an item from an empty list.
+    # Since no valid index exists, the function returns None.
     another_empty_list = []
     removed = delete_at(another_empty_list, 0)
     print("Delete from empty list:", removed )
-
-
 
 
 
