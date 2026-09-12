@@ -27,6 +27,10 @@ def linear_search(lst, target):
     - Add comments explaining why linear search
       has O(n) time complexity.
     """
+    # I added steps and execution time to better show the difference between
+    # the two algorithms. Linear search checks items one by one, while binary
+    # search cuts the search area in half each time, making it much faster
+    # on large sorted datasets.
     steps = 0
 
     for index in range(len(lst)):
@@ -104,6 +108,9 @@ def main():
     print(f"\tLinear search -> index: {idx_linear}, steps: {linear_steps}")
     print(f"\tBinary search -> index: {idx_binary}, steps: {binary_steps}")
 
+    # Both searches find the value because 40 is in the list.
+    # Binary search uses fewer steps because it eliminates half of the list each time.
+
     # Search for a value that does not exist
     idx_linear, linear_steps = linear_search(small_data, value_absent)
     idx_binary, binary_steps = binary_search(small_data, value_absent)
@@ -111,6 +118,9 @@ def main():
     print(f"\nSearch for {value_absent}: ")
     print(f"\tLinear search -> index: {idx_linear}, steps: {linear_steps}")
     print(f"\tBinary search -> index: {idx_binary}, steps: {binary_steps}")
+
+    # Both searches return -1 because 25 is not in the list.
+    # Binary search still uses fewer steps because the list is sorted.
 
     # ===============================
     # TODO (Student): LARGE DATASET
@@ -132,17 +142,18 @@ def main():
     # Linear search
     start_time = time.perf_counter()
     lin_search, lin_steps = linear_search(large_data, target_value)
-    lin_time = time.perf_counter() - start_time
+    end_time = time.perf_counter()
+    lin_time = end_time - start_time
 
+    # Binary search
     start_time = time.perf_counter()
     bin_search, bin_steps = binary_search(large_data, target_value)
-    bin_time = time.perf_counter() - start_time
+    end_time = time.perf_counter()
+    bin_time = end_time - start_time
 
     print(f"\nList length: {len(large_data)}")
     print(f"Target value: {target_value}")
 
-    # Binary search finishes nearly instantly because log2(1,000,000) is ~20 steps,
-    # whereas linear search performs 1,000,000 iterations in the worst case.
     print(f"\nLinear search found the target at index {lin_search}.")
     print(f"Linear search steps: {lin_steps}")
     print(f"Linear search time: {lin_time:.4f} seconds.")
@@ -150,6 +161,10 @@ def main():
     print(f"\nBinary search found the target at index {bin_search}.")
     print(f"Binary search steps: {bin_steps}")
     print(f"Binary search time: {bin_time:.8f} seconds")
+
+    # Linear search checks each item until it finds the target, so it takes
+    # 1,000,000 steps in this worst-case example.
+    # Binary search cuts the search area in half each time, so it only takes about 20 steps.
 
     # ===============================
     # TODO (Student): EDGE CASES
@@ -181,6 +196,8 @@ def main():
     print(f"\nLinear search on []: {linear_result}")
     print(f"Binary search on []: {binary_result}")
 
+    # Both searches return -1 because the list is empty and the target is not found.
+
     # Edge Case 2: Value at first position
     lst = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
     print("\nEDGE CASE 2: VALUE AT FIRST POSITION")
@@ -206,6 +223,9 @@ def main():
     print(f"Binary search steps: {binary_steps}")
     print(f"Binary search time: {binary_time:.8f} seconds.")
 
+    # Linear search finds the first value immediately because it starts at index 0.
+    # Binary search still works because the list is sorted.
+
     # Edge Case 3: Unsorted list
     unsorted_lst = [8, 3, 10, 1, 6, 14, 4]
     print("\nEDGE CASE 3: UNSORTED LIST")
@@ -217,12 +237,13 @@ def main():
     print(f"\nLinear search for 3: index {linear_result}")
     print(f"Linear search steps: {linear_steps}")
 
-    # Binary search assumes the list is sorted.
-    # Therefore, the results on an unsorted list is unreliable.
     binary_result, binary_steps = binary_search(unsorted_lst, 3)
 
     print(f"\nBinary search for 3: index {binary_result}")
     print(f"Binary search steps: {binary_steps}")
+
+    # Binary search assumes the list is sorted.
+    # Therefore, the result on an unsorted list is unreliable.
 
 if __name__ == "__main__":
     main()
