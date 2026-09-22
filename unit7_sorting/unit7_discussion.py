@@ -13,6 +13,8 @@ Your goal is to demonstrate both your coding ability and your
 understanding of algorithm efficiency and behavior.
 """
 
+import time
+import random
 
 def bubble_sort(lst):
     """
@@ -133,15 +135,18 @@ def main():
     print("\n=== DATASET #1 ===")
     print("TODO: Create an unsorted dataset and test both sorting algorithms.")
 
+    # Create the first unsorted dataset
     unsorted_lst = [45, 21, 6, 845, 2, 73, 100]
 
     print("\nORIGINAL UNSORTED LIST")
     print(unsorted_lst)
 
+    # Sort the dataset using bubble sort
     bubble_lst = bubble_sort(unsorted_lst)
     print("\nBUBBLE-SORTED LIST")
     print(bubble_lst)
 
+    # Sort the same dataset using merge sort
     merge_lst = merge_sort(unsorted_lst)
     print("\nMERGE-SORTED LIST")
     print(merge_lst)
@@ -159,15 +164,18 @@ def main():
     print("\n=== DATASET #2 ===")
     print("TODO: Create a second dataset and compare sorting results.")
 
+    # Create a second unsorted dataset with different values
     second_set = [3, 999, 80, 128, 47, 6, 272]
 
     print("\nORIGINAL UNSORTED LIST")
     print(second_set)
 
+    # Sort the second dataset using bubble sort
     bubble_second = bubble_sort(second_set)
     print("\nBUBBLE-SORTED LIST")
     print(bubble_second)
 
+    # Use the same dataset using merge sort
     merge_second = merge_sort(second_set)
     print("\nMERGE-SORTED LIST")
     print(merge_second)
@@ -191,6 +199,7 @@ def main():
     print("\n=== EDGE CASE TESTS ===")
     print("TODO: Demonstrate and explain edge cases.")
 
+    # Tests whether both sorting algorithms can handle a list with no values.
     print("\nEDGE CASE 1: EMPTY LIST")
     print("-----------------------------")
 
@@ -198,14 +207,17 @@ def main():
     print("EMPTY LIST")
     print(empty_list)
 
+    # Bubble Sort should return an empty list without errors.
     bubble_empty = bubble_sort(empty_list)
     print("\nBUBBLE-SORTED LIST")
     print(bubble_empty)
 
+    # Merge Sort should also return an empty list without errors.
     merge_empty = merge_sort(empty_list)
     print("\nMERGE-SORTED LIST")
     print(merge_empty)
 
+    # Tests whether both algorithms correctly sort a list containing repeated values.
     print("\nEDGE CASE 2: DUPLICATE VALUES")
     print("-----------------------------")
 
@@ -213,14 +225,50 @@ def main():
     print("LIST WITH DUPLICATE VALUES")
     print(duplicate_lst)
 
+    # Bubble Sort should keep all duplicate values while sorting the list.
     bubble_duplicate = bubble_sort(duplicate_lst)
     print("\nBUBBLE-SORTED LIST")
     print(bubble_duplicate)
 
+    # Merge Sort should also correctly sort the list while keeping duplicates.
     merge_duplicate = merge_sort(duplicate_lst)
     print("\nMERGE-SORTED LIST")
     print(merge_duplicate)
 
+    # Tests the performance difference between Bubble Sort and Merge Sort as the dataset becomes larger.
+    # Use randomly ordered values to compare the performance of both algorithms.
+    print("\nEDGE CASE 3: LARGE RANDOM DATASET")
+    print("-----------------------------")
+
+    # Create 10,000 values and randomly shuffle them.
+    # Both algorithms will receive the exact same unsorted data.
+    large_list = list(range(1, 10001))
+    random.shuffle(large_list)
+
+    # Measure how long Bubble Sort takes to sort the large dataset.
+    start = time.perf_counter()
+    bubble_lst = bubble_sort(large_list)
+    bubble_time = time.perf_counter() - start
+
+    # Measure how long Merge Sort takes to sort the same large dataset.
+    start = time.perf_counter()
+    merge_sort(large_list)
+    merge_time = time.perf_counter() - start
+
+    print("Random dataset size:", len(large_list))
+
+    # Verify that Bubble Sort successfully sorted the dataset.
+    print("\nBUBBLE-SORTED LIST")
+    print("List is sorted?: ", bubble_lst == sorted(bubble_lst))
+    print("Sort time:", f"{bubble_time:.4f}", "seconds")
+
+    # Verify that Merge Sort successfully sorted the dataset.
+    print("\nMERGE-SORTED LIST")
+    print("List is sorted?: ", merge_lst == sorted(merge_lst))
+    print("Sort time:", f"{merge_time:.4f}", "seconds")
+
+    # Comparing the execution times demonstrates how Merge Sort scales
+    # more efficiently than Bubble Sort as the dataset becomes larger.
 
 if __name__ == "__main__":
     main()
