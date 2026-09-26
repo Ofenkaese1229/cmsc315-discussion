@@ -12,9 +12,7 @@ social connections).
 
 ===========================================================
 """
-
 from collections import deque
-
 
 def bfs(graph, start):
     """
@@ -32,8 +30,42 @@ def bfs(graph, start):
     - Why neighbors are added to the queue.
     - How BFS differs from depth-first traversal.
     """
+    # Return an empty list if the graph is empty or
+    # the starting node does not exist in the graph.
+    if not graph or start not in graph:
+        return []
 
-    pass
+    # The visited set keeps track of nodes that have already
+    # been discovered so they are not added to the queue again.
+    visited = set()
+
+    # BFS uses a queue (FIFO), so the first node added
+    # is the first node processed. This allows BFS to
+    # explore the graph level by level.
+    queue = deque([start])
+
+    visited.add(start)
+
+    visited_order = []
+
+    while queue:
+        # Remove the first node from the queue.
+        # This is what creates the FIFO behavior of BFS.
+        current_node = queue.popleft()
+
+        visited_order.append(current_node)
+
+        # Add unvisited neighbors to the queue.
+        # These neighbors will be processed after the
+        # nodes already waiting in the queue.
+        for neighbor in graph[current_node]:
+            if neighbor not in visited:
+                visited.add(neighbor)
+                queue.append(neighbor)
+
+    # BFS explores nearby nodes first, while DFS follows
+    # one path as far as possible before backtracking.
+    return visited_order
 
 
 def main():
@@ -53,6 +85,25 @@ def main():
     print("\n=== GRAPH STRUCTURE ===")
     print("TODO: Create and display a graph.")
 
+    # Nodes represent the people.
+    # Edges represent the friendship connections between them.
+    social_network = {
+        "Amy": ["Bob", "Charlie", "Emily"],
+        "Bob": ["Amy", "Charlie"],
+        "Charlie": ["Amy", "Bob", "David"],
+        "David": ["Charlie", "Emily", "Frank"],
+        "Emily": ["David", "Frank"],
+        "Frank": ["Emily", "David"]
+    }
+
+    print("\nSOCIAL NETWORK:")
+
+    for person, friends in social_network.items():
+        print(f"\n{person}:")
+        for friend in friends:
+            print(f"  -> {friend}")
+
+
     # ===============================
     # TODO (Student): BFS TRAVERSAL
     # ===============================
@@ -67,6 +118,25 @@ def main():
 
     print("\n=== BFS TRAVERSAL ===")
     print("TODO: Perform and explain BFS traversal.")
+
+    start_node = "Amy"
+
+    traversal = bfs(social_network, start_node)
+
+    print("\nSTARTING NODE:")
+    print(start_node)
+    print(f"\nTRAVERSAL ORDER: ")
+    print(f"{' -> '.join(traversal)}")
+
+    # BFS starts with Amy at Level 0.
+    # Bob, Charlie, and Emily are directly connected to Amy,
+    # so they are visited at Level 1.
+    # David and Frank are reached through those Level 1 nodes,
+    # so they are visited at Level 2.
+    print("\nBFS LEVELS:")
+    print("Level 0: Amy")
+    print("Level 1: Bob, Charlie, Emily")
+    print("Level 2: David, Frank")
 
     # ===============================
     # TODO (Student): EDGE CASES
@@ -83,10 +153,54 @@ def main():
     #
     # Explain what happens in each case.
 
+
     print("\n=== EDGE CASE TESTS ===")
     print("TODO: Demonstrate and explain edge cases.")
 
+    print("\nEDGE CASE 1: Use a disconnected node.")
 
+    # Add Grace to the social network.
+    # Grace has an empty list, meaning she has no connections
+    # to any other person in the graph.
+    social_network["Grace"] = []
+
+    # Display all people in the social network.
+    print("\nORIGINAL NETWORK AFTER ADDING 'GRACE':")
+    for person, friends in social_network.items():
+        print(f"{person}:")
+        for friend in friends:
+            print(f"  -> {friend}")
+
+    # Display Grace's connections.
+    # The empty list [] shows that Grace has no connections.
+    print(f"\nGRACE's CONNECTIONS:", social_network["Grace"])
+
+    # Run BFS starting from Amy.
+    # BFS will visit everyone who can be reached from Amy.
+    disconnected_result = bfs(social_network, "Amy")
+
+    print("\nBFS STARTING FROM AMY:")
+    print(f" -> ".join(disconnected_result))
+
+    # Grace will NOT appear in the traversal because
+    # there is no path connecting Amy to Grace.
+    if "Grace" not in disconnected_result:
+        print("\nGrace was NOT visited.")
+        print("Grace is disconnected from Amy.")
+
+    print("\nEDGE CASE 2: Handle a missing start node safely.")
+
+    missing_start = "Zoe"
+
+    missing_start_result = bfs(social_network, missing_start)
+
+    print("\nBFS STARTING FROM ZOE:")
+
+    if not missing_start_result:
+        print("\nNo traversal was performed.")
+        print(f"{missing_start} is NOT in the social network.")
+    else:
+        print(" -> ".join(missing_start_result))
 
 if __name__ == "__main__":
     main()
